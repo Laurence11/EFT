@@ -1,0 +1,7 @@
+parameters:
+#    bwf_site.example.class: BWF\SiteBundle\Example
+
+services:
+#    bwf_site.example:
+#        class: %bwf_site.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

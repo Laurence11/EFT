@@ -1,0 +1,16 @@
+bwf_site:
+    resource: "@BWFSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bwf_formations:
+    resource: "@BWFFormationsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bwf_videos:
+    resource: "@BWFVideosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bwf_articles:
+    resource: "@BWFArticlesBundle/Resources/config/routing.yml"
+    prefix:   /
+

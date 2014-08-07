@@ -1,0 +1,7 @@
+parameters:
+#    bwf_videos.example.class: BWF\VideosBundle\Example
+
+services:
+#    bwf_videos.example:
+#        class: %bwf_videos.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

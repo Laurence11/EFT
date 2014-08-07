@@ -1,0 +1,7 @@
+parameters:
+#    bwf_formations.example.class: BWF\FormationsBundle\Example
+
+services:
+#    bwf_formations.example:
+#        class: %bwf_formations.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

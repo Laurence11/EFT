@@ -1,0 +1,3 @@
+bwf_formations_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BWFFormationsBundle:Default:index }
