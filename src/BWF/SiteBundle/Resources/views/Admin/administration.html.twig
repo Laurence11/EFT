@@ -1,0 +1,10 @@
+{# empty Twig template #}
+{% extends '::templateGeneral.html.twig' %}
+
+{% block content %}
+{% block title %}Administration{% endblock %}
+<div>Sélectionnez une section dans le menu </div>
+{% include  "BWFSiteBundle:Admin:menuAdmin.html.twig" %}
+
+
+{% endblock %}

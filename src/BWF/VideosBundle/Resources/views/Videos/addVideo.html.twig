@@ -1,0 +1,20 @@
+{#
+page pour le formulaire d'ajout des formations
+Apparait dans le template listeBlogs et detail(blogs)
+methode d'heritage : path : ieps_site_de_base_blog_add','id' : 'new'
+Nom du Bundle : IepsSiteDeBaseBundle
+Controller : Blog
+Route : ieps_site_de_base_blog_add parametres : le_blog/add
+Action/edit : permet d'ajouter un blog(post) 
+Pour tester : /le_blog  ajouter
+formulaire a inclure
+#}
+
+{% block content %}
+        
+         <form action="{{ path('bwf_formations_add',{ 'id' : 'new'}) }}" method="post" >
+            {{ form_widget(form) }}
+            <p><input type="submit" /></p>
+        </form>
+
+    {% endblock %}

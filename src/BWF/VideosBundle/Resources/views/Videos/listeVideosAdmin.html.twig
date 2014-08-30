@@ -1,0 +1,16 @@
+{# empty Twig template #}
+<li><a href="{{path('bwf_videos_add',{'id' : 'new'})}}">Ajouter une Video</a></li>
+{% for video in videos %}
+
+    <h3>{{ video.nom }}</h3>
+    <p>{{video.texte}}</p>
+    <p>
+        {{ video.url|raw }}
+    </p>
+  <ul>        
+
+<li><a href="{{path('bwf_videos_edit',{'id' : video.id})}}">Modifier cette Vidéo</a></li>
+<li><a href="{{path('bwf_videos_delete',{'id' : video.id})}}" onclick="return window.confirm('Etes-vous certain(e) de vouloir supprimer cet enregistrement ?')">Suprimer cette video</a></li>
+        </ul>
+{% endfor %}
+

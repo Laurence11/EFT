@@ -1,0 +1,14 @@
+{# template liste articles pour administration #}
+
+<li><a href="{{path('bwf_articles_add',{'id' : 'new'})}}">Ajouter un article</a></li>
+{% for article in articles %}
+
+<h2>{{article.nom}}</h2>
+<p>{{article.texte}}</p>
+{#<p>{{article.date|date('m-d-y')}}</p>#}
+       <ul>        
+
+<li><a href="{{path('bwf_articles_edit',{'id' : article.id})}}">Modifier cet article </a></li>
+<li><a href="{{path('bwf_articles_delete',{'id' : article.id})}}" onclick="return window.confirm('Etes-vous certain(e) de vouloir supprimer cet enregistrement ?')">Suprimer cet article</a></li>
+        </ul>
+{% endfor %}

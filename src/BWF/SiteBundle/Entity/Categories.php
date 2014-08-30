@@ -54,8 +54,18 @@ class Categories
      * @ORM\Column(name="slug", type="string", length=45, nullable=false)
      */
     private $slug;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug_en", type="string", length=45, nullable=false)
+     */
+    private $slug_en;
 
-
+    public function __toString()
+    {
+    return $this->nom;
+    }
 
     /**
      * Get id
@@ -180,5 +190,28 @@ class Categories
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    /**
+     * Set slug_en
+     *
+     * @param string $slug_en
+     * @return Categories
+     */
+    public function setSlug_en($slug_en)
+    {
+        $this->slug_en = $slug_en;
+
+        return $this;
+    }
+
+    /**
+     * Get slug_en
+     *
+     * @return string 
+     */
+    public function getSlug_en()
+    {
+        return $this->slug_en;
     }
 }

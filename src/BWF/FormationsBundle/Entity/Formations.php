@@ -1,5 +1,5 @@
 <?php
-namespace Soleil\SiteEftBundle\Entity;
+namespace BWF\FormationsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -110,7 +110,11 @@ class Formations
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
+    public function __toString()
+    {
+    return $this->nom;
+    }
+    
     /**
      * Get id
      *

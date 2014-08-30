@@ -1,3 +1,24 @@
+bwf_site_admin:
+    pattern: /admin
+    defaults: { _controller: BWFSiteBundle:Admin:index }
+
+bwf_site_liste_articles:
+    pattern: /admin/articles
+    defaults: { _controller: BWFArticlesBundle:Article:listeArticlesAdmin }
+
+bwf_site_liste_formations:
+    pattern: /admin/formations
+    defaults: { _controller: BWFFormationsBundle:Formation:ListeFormationsAdmin }
+
+bwf_site_liste_participants:
+    pattern: /admin/participants
+    defaults: { _controller: BWFFormationsBundle:Participant:listeParticipants }
+    
+bwf_site_liste_videos:
+    pattern:  /admin/videos
+    defaults: { _controller: BWFVideosBundle:Video:listeVideosAdmin }
+    
 bwf_site_pages:
-    pattern:  /acceuil
-    defaults: { _controller: BWFArticlesBundle:Default:index }
+    pattern:  /{slug}
+    defaults: { _controller: BWFSiteBundle:Categorie:detail }
+

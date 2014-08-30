@@ -1,3 +1,7 @@
+bwf_contact:
+    resource: "@BWFContactBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bwf_site:
     resource: "@BWFSiteBundle/Resources/config/routing.yml"
     prefix:   /

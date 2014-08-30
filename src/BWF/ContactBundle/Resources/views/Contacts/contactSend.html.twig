@@ -1,0 +1,17 @@
+{#le formulaire de contact
+Nom du Bundle : BWFContactBundle
+Controller : Contact
+Action : contacter
+Pour tester : envoi mail
+Route : BWF_contact parametres : contact/send
+#}
+{% extends '::templateGeneral.html.twig' %}
+{% block title %}{{ parent() }} - Contact - message envoyé{% endblock %}
+{% block ariane %}{{ parent() }} > Contact > message envoyé{% endblock %}
+
+{% block content%}
+
+<p>votre message a bien été envoyé</p>
+
+
+{% endblock %}

@@ -1,3 +1,15 @@
+bwf_videos_add:
+    pattern:  /admin/videos/add
+    defaults: { _controller: BWFVideosBundle:Video:addVideo }
+    
+bwf_videos_edit:
+    pattern:  /admin/videos/edit/{id}
+    defaults: { _controller: BWFVideosBundle:Video:editVideo }
+    
+bwf_videos_delete:
+    pattern:  /admin/videos/delete/{id}
+    defaults: { _controller: BWFVideosBundle:Video:deleteVideo }
+    
 bwf_videos_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BWFVideosBundle:Default:index }
+    pattern:  /videos
+    defaults: { _controller: BWFVideosBundle:Video:listeVideos }

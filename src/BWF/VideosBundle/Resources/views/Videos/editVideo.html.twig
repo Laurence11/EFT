@@ -1,0 +1,22 @@
+{#
+page pour le formulaire d'édition des videos
+Apparait dans le template admin/listevideos
+methode d'heritage : path : ieps_site_de_base_blog_edit','id' : blogs.id
+Nom du Bundle : IepsSiteDeBaseBundle
+Controller : Blog
+Route : ieps_site_de_base_blog_edit parametres : le_blog/edit/{id}
+Action/edit : permet d'éditer un blog(post) 
+Pour tester : /le_blog  edit
+formulaire a inclure
+#}
+
+{% block content %}
+        
+     <form action="" method="post" >
+       {{ form_widget(form) }}
+       <p><input type="submit" /></p>
+     </form>
+
+{% endblock %}
+
+

@@ -59,12 +59,19 @@ class Videos
     /**
      * @var \Categories
      *
-     * @ORM\ManyToOne(targetEntity="/BWF/SiteBundle/Entity/Categories")
+     * @ORM\ManyToOne(targetEntity="\BWF\SiteBundle\Entity\Categories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categorie", referencedColumnName="id")
      * })
      */
     private $categorie;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vedette", type="boolean", nullable=false)
+     */
+    private $vedette;
 
 
 
@@ -214,6 +221,29 @@ class Videos
     public function getCategorie()
     {
         return $this->categorie;
+    }
+    
+    /**
+     * Set vedette
+     *
+     * @param boolean $vedette
+     * @return Articles
+     */
+    public function setVedette($vedette)
+    {
+        $this->vedette = $vedette;
+
+        return $this;
+    }
+
+    /**
+     * Get vedette
+     *
+     * @return boolean 
+     */
+    public function getVedette()
+    {
+        return $this->vedette;
     }
 }
 

@@ -1,0 +1,20 @@
+{#
+page pour le formulaire d'ajout des articles
+Apparait dans le template listeBlogs et detail(blogs)
+methode d'heritage : path : ieps_site_de_base_blog_add','id' : 'new'
+Nom du Bundle : IepsSiteDeBaseBundle
+Controller : Blog
+Route : ieps_site_de_base_blog_add parametres : admin/articles/add
+Action/add : permet d'ajouter un article 
+Pour tester : /le_blog  ajouter
+formulaire a inclure
+#}
+
+{% block content %}
+        
+         <form action="{{ path('bwf_articles_add',{ 'id' : 'new'}) }}" method="post" >
+            {{ form_widget(form) }}
+            <p><input type="submit" /></p>
+        </form>
+
+    {% endblock %}

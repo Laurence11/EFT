@@ -1,0 +1,6 @@
+bwf_contact:
+    pattern:  /
+    defaults: { _controller: BWFContactBundle:Contact:contacter }
+    requirements: 
+        _method:  GET|POST
+

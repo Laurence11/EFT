@@ -1,0 +1,16 @@
+{# empty Twig template #}
+
+<li><a href="{{path('bwf_formations_add',{'id' : 'new'})}}">Ajouter une Formation</a></li>
+{% for formation in formations %}
+<h3>{{formation.nom}}</h3>
+        <p>{{formation.texte}}</p>
+        <p>PRIX : {{formation.prix}} Euros</p>
+        <p>DATE DEBUT : {{formation.dateDebut|date('d-m-y')}}</p>
+        <p>DATE FIN : {{formation.dateFin|date('d-m-y')}}</p>
+        <p>Nombre de participants maximum : {{formation.participantMax}}</p>
+       <ul>        
+
+<li><a href="{{path('bwf_formations_edit',{'id' : formation.id})}}">Modifier une Formation</a></li>
+<li><a href="{{path('bwf_formations_delete',{'id' : formation.id})}}" onclick="return window.confirm('Etes-vous certain(e) de vouloir supprimer cet enregistrement ?')">Suprimer cette formation</a></li>
+        </ul>
+{% endfor %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{%block title%}EFT {%endblock%} </title>
+    </head>
+    <body>
+        <header>
+<!-- Affichage menu dynamique -->
+    {{ render (controller('BWFSiteBundle:Categorie:menu')) }}
+<!-- Fin affichage menu dynamique -->
+        </header>
+
+      <!-- Affichage contenu central des pages-->
+     {% block content %}
+            
+          {% endblock %}
+<!-- Fin affichage contenu central -->  
+
+    </body>
+</html>

@@ -48,6 +48,14 @@ class Participants
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Formations", mappedBy="participants")
+     * @ORM\JoinTable(name="reservations",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="formations", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="participants", referencedColumnName="id")
+     *   }
+     * )
      */
     private $formations;
 
@@ -58,7 +66,11 @@ class Participants
     {
         $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
+    public function __toString()
+    {
+    return $this->nom;
+    }
 
     /**
      * Get id

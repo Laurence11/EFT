@@ -1,0 +1,7 @@
+parameters:
+#    bwf_contact.example.class: BWF\ContactBundle\Example
+
+services:
+#    bwf_contact.example:
+#        class: %bwf_contact.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

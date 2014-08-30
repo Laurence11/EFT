@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/SiteBundle/Entity/Categories.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Entity/Articles.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Entity/Formations.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Controller/DefaultController.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/VideosBundle/Entity/Videos.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Entity/Participants.php</file>
-            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/SiteBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Resources/views/Articles/listeArticlesAdmin.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/SiteBundle/Resources/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Resources/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Resources/views/Articles/listeArticles.html.twig</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Resources/config/routing.yml</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Controller/ArticleController.php</file>
+            <file>file:/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Controller/FormationController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -135,25 +135,129 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // bwf_site_pages
-        if ($pathinfo === '/acceuil') {
-            return array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\DefaultController::indexAction',  '_route' => 'bwf_site_pages',);
-        }
-
-        if (0 === strpos($pathinfo, '/hello')) {
-            // bwf_formations_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_formations_homepage')), array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\DefaultController::indexAction',));
+        // bwf_contact
+        if (rtrim($pathinfo, '/') === '') {
+            if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                goto not_bwf_contact;
             }
 
-            // bwf_videos_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_videos_homepage')), array (  '_controller' => 'BWF\\VideosBundle\\Controller\\DefaultController::indexAction',));
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'bwf_contact');
+            }
+
+            return array (  '_controller' => 'BWF\\ContactBundle\\Controller\\ContactController::contacterAction',  '_route' => 'bwf_contact',);
+        }
+        not_bwf_contact:
+
+        if (0 === strpos($pathinfo, '/admin')) {
+            // bwf_site_admin
+            if ($pathinfo === '/admin') {
+                return array (  '_controller' => 'BWF\\SiteBundle\\Controller\\AdminController::indexAction',  '_route' => 'bwf_site_admin',);
+            }
+
+            // bwf_site_liste_articles
+            if ($pathinfo === '/admin/articles') {
+                return array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\ArticleController::listeArticlesAdminAction',  '_route' => 'bwf_site_liste_articles',);
+            }
+
+            // bwf_site_liste_formations
+            if ($pathinfo === '/admin/formations') {
+                return array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\FormationController::ListeFormationsAdminAction',  '_route' => 'bwf_site_liste_formations',);
+            }
+
+            // bwf_site_liste_participants
+            if ($pathinfo === '/admin/participants') {
+                return array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\ParticipantController::listeParticipantsAction',  '_route' => 'bwf_site_liste_participants',);
+            }
+
+            // bwf_site_liste_videos
+            if ($pathinfo === '/admin/videos') {
+                return array (  '_controller' => 'BWF\\VideosBundle\\Controller\\VideoController::listeVideosAdminAction',  '_route' => 'bwf_site_liste_videos',);
+            }
+
+        }
+
+        // bwf_site_pages
+        if (preg_match('#^/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_site_pages')), array (  '_controller' => 'BWF\\SiteBundle\\Controller\\CategorieController::detailAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/admin/formations')) {
+            // bwf_formations_add
+            if ($pathinfo === '/admin/formations/add') {
+                return array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\FormationController::addFormationAction',  '_route' => 'bwf_formations_add',);
+            }
+
+            // bwf_formations_edit
+            if (0 === strpos($pathinfo, '/admin/formations/editer') && preg_match('#^/admin/formations/editer/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_formations_edit')), array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\FormationController::editFormationAction',));
+            }
+
+            // bwf_formations_delete
+            if (0 === strpos($pathinfo, '/admin/formations/delete') && preg_match('#^/admin/formations/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_formations_delete')), array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\FormationController::deleteFormationAction',));
+            }
+
+        }
+
+        // bwf_formations_homepage
+        if (preg_match('#^/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_formations_homepage')), array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\FormationController::listeFormationsAction',));
+        }
+
+        // bwf_formations_participant_liste
+        if ($pathinfo === '/admin/participants') {
+            return array (  '_controller' => 'BWFFormationsBundle:Participants:listeParticipants',  '_route' => 'bwf_formations_participant_liste',);
+        }
+
+        // bwf_formations_participant_add
+        if ($pathinfo === '/participant/ajouter') {
+            return array (  '_controller' => 'BWF\\FormationsBundle\\Controller\\ParticipantController::addParticipantAction',  '_route' => 'bwf_formations_participant_add',);
+        }
+
+        if (0 === strpos($pathinfo, '/admin/videos')) {
+            // bwf_videos_add
+            if ($pathinfo === '/admin/videos/add') {
+                return array (  '_controller' => 'BWF\\VideosBundle\\Controller\\VideoController::addVideoAction',  '_route' => 'bwf_videos_add',);
+            }
+
+            // bwf_videos_edit
+            if (0 === strpos($pathinfo, '/admin/videos/edit') && preg_match('#^/admin/videos/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_videos_edit')), array (  '_controller' => 'BWF\\VideosBundle\\Controller\\VideoController::editVideoAction',));
+            }
+
+            // bwf_videos_delete
+            if (0 === strpos($pathinfo, '/admin/videos/delete') && preg_match('#^/admin/videos/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_videos_delete')), array (  '_controller' => 'BWF\\VideosBundle\\Controller\\VideoController::deleteVideoAction',));
+            }
+
+        }
+
+        // bwf_videos_homepage
+        if ($pathinfo === '/videos') {
+            return array (  '_controller' => 'BWF\\VideosBundle\\Controller\\VideoController::listeVideosAction',  '_route' => 'bwf_videos_homepage',);
+        }
+
+        if (0 === strpos($pathinfo, '/admin/article')) {
+            // bwf_articles_add
+            if ($pathinfo === '/admin/article/add') {
+                return array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\ArticleController::addArticleAction',  '_route' => 'bwf_articles_add',);
+            }
+
+            // bwf_articles_edit
+            if (0 === strpos($pathinfo, '/admin/article/edit') && preg_match('#^/admin/article/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_articles_edit')), array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\ArticleController::editArticleAction',));
+            }
+
+            // bwf_articles_delete
+            if (0 === strpos($pathinfo, '/admin/article/delete') && preg_match('#^/admin/article/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_articles_delete')), array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\ArticleController::deleteArticleAction',));
             }
 
             // bwf_articles_homepage
-            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bwf_articles_homepage')), array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\DefaultController::indexAction',));
+            if ($pathinfo === '/admin/articles') {
+                return array (  '_controller' => 'BWF\\ArticlesBundle\\Controller\\ArticleController::listeArticlesAdminAction',  '_route' => 'bwf_articles_homepage',);
             }
 
         }

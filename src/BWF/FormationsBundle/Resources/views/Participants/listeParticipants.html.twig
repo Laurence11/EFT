@@ -1,0 +1,9 @@
+{% for participants in participant %}
+
+        <p>NOM : {{participant.nom}}</p>
+        <p>PRENOM : {{participant.prenom}}</p>
+        <p>EMAIL : {{participant.mail}}</p>
+       
+        
+        <h2><a href="{{path('bwf_formations_participant_edit',{'id' : 'new'})}}">Modifier ce participant</a></h2>
+{% endfor %}

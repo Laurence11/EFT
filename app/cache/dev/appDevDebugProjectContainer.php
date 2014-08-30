@@ -590,7 +590,7 @@ class appDevDebugProjectContainer extends Container
         $b = new \Doctrine\DBAL\Configuration();
         $b->setSQLLogger($a);
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'symfony', 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => 8889, 'dbname' => 'AVEC_LE_SOLEIL', 'user' => 'root', 'password' => 'root', 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -603,8 +603,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_bdb1a1d9bdacb950ef9ea0d26f15375bbdf3838d4b046d7ae8157d09348ac611');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_bdb1a1d9bdacb950ef9ea0d26f15375bbdf3838d4b046d7ae8157d09348ac611');
@@ -612,20 +611,32 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_bdb1a1d9bdacb950ef9ea0d26f15375bbdf3838d4b046d7ae8157d09348ac611');
 
-        $d = new \Doctrine\ORM\Configuration();
-        $d->setEntityNamespaces(array());
-        $d->setMetadataCacheImpl($a);
-        $d->setQueryCacheImpl($b);
-        $d->setResultCacheImpl($c);
-        $d->setMetadataDriverImpl(new \Doctrine\ORM\Mapping\Driver\DriverChain());
-        $d->setProxyDir('/Applications/MAMP/htdocs/EFT/app/cache/dev/doctrine/orm/Proxies');
-        $d->setProxyNamespace('Proxies');
-        $d->setAutoGenerateProxyClasses(true);
-        $d->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $d->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $d->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_bdb1a1d9bdacb950ef9ea0d26f15375bbdf3838d4b046d7ae8157d09348ac611');
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $d);
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/Applications/MAMP/htdocs/EFT/src/BWF/ArticlesBundle/Entity', 1 => '/Applications/MAMP/htdocs/EFT/src/BWF/VideosBundle/Entity', 2 => '/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Entity', 3 => '/Applications/MAMP/htdocs/EFT/src/BWF/SiteBundle/Entity', 4 => '/Applications/MAMP/htdocs/EFT/src/BWF/ContactBundle/Entity'));
+
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'BWF\\ArticlesBundle\\Entity');
+        $f->addDriver($e, 'BWF\\VideosBundle\\Entity');
+        $f->addDriver($e, 'BWF\\FormationsBundle\\Entity');
+        $f->addDriver($e, 'BWF\\SiteBundle\\Entity');
+        $f->addDriver($e, 'BWF\\ContactBundle\\Entity');
+
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('BWFArticlesBundle' => 'BWF\\ArticlesBundle\\Entity', 'BWFVideosBundle' => 'BWF\\VideosBundle\\Entity', 'BWFFormationsBundle' => 'BWF\\FormationsBundle\\Entity', 'BWFSiteBundle' => 'BWF\\SiteBundle\\Entity', 'BWFContactBundle' => 'BWF\\ContactBundle\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('/Applications/MAMP/htdocs/EFT/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(true);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -1375,7 +1386,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocaleListenerService()
     {
-        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('en', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
+        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('fr', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
     }
 
     /**
@@ -2223,12 +2234,12 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['swiftmailer.mailer.default.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => new \Swift_Transport_Esmtp_AuthHandler(array(0 => new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator(), 1 => new \Swift_Transport_Esmtp_Auth_LoginAuthenticator(), 2 => new \Swift_Transport_Esmtp_Auth_PlainAuthenticator()))), $this->get('swiftmailer.mailer.default.transport.eventdispatcher'));
 
-        $instance->setHost('127.0.0.1');
-        $instance->setPort(25);
-        $instance->setEncryption(NULL);
-        $instance->setUsername(NULL);
-        $instance->setPassword(NULL);
-        $instance->setAuthMode(NULL);
+        $instance->setHost('smtp.gmail.com');
+        $instance->setPort(465);
+        $instance->setEncryption('ssl');
+        $instance->setUsername('kei00998@gmail.com');
+        $instance->setPassword('albator1968');
+        $instance->setAuthMode('login');
         $instance->setTimeout(30);
         $instance->setSourceIp(NULL);
 
@@ -2949,6 +2960,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('/Applications/MAMP/htdocs/EFT/src/BWF/VideosBundle/Resources/views', 'BWFVideos');
         $instance->addPath('/Applications/MAMP/htdocs/EFT/src/BWF/FormationsBundle/Resources/views', 'BWFFormations');
         $instance->addPath('/Applications/MAMP/htdocs/EFT/src/BWF/SiteBundle/Resources/views', 'BWFSite');
+        $instance->addPath('/Applications/MAMP/htdocs/EFT/src/BWF/ContactBundle/Resources/views', 'BWFContact');
         $instance->addPath('/Applications/MAMP/htdocs/EFT/src/Acme/DemoBundle/Resources/views', 'AcmeDemo');
         $instance->addPath('/Applications/MAMP/htdocs/EFT/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('/Applications/MAMP/htdocs/EFT/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
@@ -3437,6 +3449,7 @@ class appDevDebugProjectContainer extends Container
                 'BWFVideosBundle' => 'BWF\\VideosBundle\\BWFVideosBundle',
                 'BWFFormationsBundle' => 'BWF\\FormationsBundle\\BWFFormationsBundle',
                 'BWFSiteBundle' => 'BWF\\SiteBundle\\BWFSiteBundle',
+                'BWFContactBundle' => 'BWF\\ContactBundle\\BWFContactBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3446,15 +3459,17 @@ class appDevDebugProjectContainer extends Container
             'kernel.container_class' => 'appDevDebugProjectContainer',
             'database_driver' => 'pdo_mysql',
             'database_host' => '127.0.0.1',
-            'database_port' => NULL,
-            'database_name' => 'symfony',
+            'database_port' => 8889,
+            'database_name' => 'AVEC_LE_SOLEIL',
             'database_user' => 'root',
-            'database_password' => NULL,
-            'mailer_transport' => 'smtp',
-            'mailer_host' => '127.0.0.1',
-            'mailer_user' => NULL,
-            'mailer_password' => NULL,
-            'locale' => 'en',
+            'database_password' => 'root',
+            'mailer_transport' => 'gmail',
+            'mailer_encryption' => 'ssl',
+            'mailer_auth_mode' => 'login',
+            'mailer_host' => 'smtp.gmail.com',
+            'mailer_user' => 'kei00998@gmail.com',
+            'mailer_password' => 'albator1968',
+            'locale' => 'fr',
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
@@ -3517,7 +3532,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.trusted_proxies' => array(
 
             ),
-            'kernel.default_locale' => 'en',
+            'kernel.default_locale' => 'fr',
             'session.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Session',
             'session.flashbag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag',
             'session.attribute_bag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBag',
@@ -3813,12 +3828,12 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.data_collector.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\DataCollector\\MessageDataCollector',
             'swiftmailer.mailer.default.transport.name' => 'smtp',
             'swiftmailer.mailer.default.delivery.enabled' => true,
-            'swiftmailer.mailer.default.transport.smtp.encryption' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.port' => 25,
-            'swiftmailer.mailer.default.transport.smtp.host' => '127.0.0.1',
-            'swiftmailer.mailer.default.transport.smtp.username' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.password' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL,
+            'swiftmailer.mailer.default.transport.smtp.encryption' => 'ssl',
+            'swiftmailer.mailer.default.transport.smtp.port' => 465,
+            'swiftmailer.mailer.default.transport.smtp.host' => 'smtp.gmail.com',
+            'swiftmailer.mailer.default.transport.smtp.username' => 'kei00998@gmail.com',
+            'swiftmailer.mailer.default.transport.smtp.password' => 'albator1968',
+            'swiftmailer.mailer.default.transport.smtp.auth_mode' => 'login',
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
             'swiftmailer.spool.default.memory.path' => '/Applications/MAMP/htdocs/EFT/app/cache/dev/swiftmailer/spool/default',

@@ -1,0 +1,15 @@
+{#le menu du site
+Nom du Bundle : BWFSiteBundle
+Controller : Categorie
+Action : menu
+Pour tester : /accueil / 
+Variables disponibles : 
+    - page:(nom, nom_en, texte, texte_en, slug, slug_en)#}
+<ul>
+{% for categorie in categories%}
+
+    <li><a href="{{path('bwf_site_pages',{'slug' : categorie.slug})}}">{{categorie.nom}}</a></li>
+         
+{%endfor%}
+ </ul>
+

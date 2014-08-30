@@ -1,3 +1,15 @@
+bwf_articles_add:
+    pattern:  /admin/article/add
+    defaults: { _controller: BWFArticlesBundle:Article:addArticle }
+    
+bwf_articles_edit:
+    pattern:  /admin/article/edit/{id}
+    defaults: { _controller: BWFArticlesBundle:Article:editArticle }
+    
+bwf_articles_delete:
+    pattern: /admin/article/delete/{id}
+    defaults: { _controller: BWFArticlesBundle:Article:deleteArticle }
+    
 bwf_articles_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BWFArticlesBundle:Default:index }
+    pattern:  /admin/articles
+    defaults: { _controller: BWFArticlesBundle:Article:listeArticlesAdmin }

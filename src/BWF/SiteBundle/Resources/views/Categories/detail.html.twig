@@ -1,0 +1,59 @@
+{#les categoriess du site
+Nom du Bundle : BWFSiteBundle
+Controller : Categorie
+Action : detail
+Pour tester : /accueil
+Route : bwf_site_pages - Paramêtre : slug
+Variables disponibles : 
+    - categorie: contenu de la categorie
+                (id, nom, texte, slug)#}
+{% extends '::templateGeneral.html.twig' %}
+{% block title %}{{ parent() }} - {{categorie.nom}}{% endblock %}
+
+{% block content %}
+<!--affichage bouton don paypal -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="niennatelrunia@hotmail.com">
+<input type="hidden" name="lc" value="FR">
+<input type="hidden" name="item_name" value="Avec le Soleil ASBL">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<!-- Fin affichage bouton don paypal-->
+<div>
+<!--{{categorie.texte}}-->
+</div>
+{% if categorie.slug == 'activites' %}
+         {{ render (controller('BWFArticlesBundle:Article:listeArticles')) }}
+{% endif %}  
+
+{% if categorie.slug == 'acceuil'%}
+     
+        {{render (controller('BWFArticlesBundle:Article:articleVedette'))}},
+        {{render (controller('BWFVideosBundle:Video:videoVedette'))}}
+{% endif%}
+        
+{% if categorie.slug == 'contact'%}
+        <h2>Nos coordonnées</h2>
+        <h3>Avec le Soleil ASBL</h3>
+        <p>rue de la Chaudronnerie 15</p>
+        <p>4230 Grivegnée</p>
+        <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=Rue+de+la+Chaudronnerie+14,+Li%C3%A8ge,+Belgique&amp;aq=0&amp;oq=rue&amp;sll=37.0625,-95.677068&amp;sspn=50.644639,93.076172&amp;ie=UTF8&amp;hq=&amp;hnear=Rue+de+la+Chaudronnerie+14,+4030+Li%C3%A8ge,+Belgique&amp;t=m&amp;z=14&amp;ll=50.631895,5.627435&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Rue+de+la+Chaudronnerie+14,+Li%C3%A8ge,+Belgique&amp;aq=0&amp;oq=rue&amp;sll=37.0625,-95.677068&amp;sspn=50.644639,93.076172&amp;ie=UTF8&amp;hq=&amp;hnear=Rue+de+la+Chaudronnerie+14,+4030+Li%C3%A8ge,+Belgique&amp;t=m&amp;z=14&amp;ll=50.631895,5.627435" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
+        {{render (controller('BWFContactBundle:Contact:Contacter'))}}
+{% endif %}
+        
+{% if categorie.slug == 'videos'%}
+        {{render (controller('BWFVideosBundle:Video:listeVideos'))}}
+{% endif %}
+        
+{% if categorie.slug == 'formations'%}
+        {{render (controller('BWFFormationsBundle:Formation:listeFormations'))}}, 
+       
+{% endif %}    
+
+{% endblock %}

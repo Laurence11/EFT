@@ -1,0 +1,16 @@
+
+<h2>Nos prochaines Formations</h2>
+<iframe src="https://www.google.com/calendar/embed?src=kei00998%40gmail.com&ctz=Europe/Brussels" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+{% for formation in formations %}
+<h3>{{formation.nom}}</h3>
+        <p>{{formation.texte}}</p>
+        <p>PRIX : {{formation.prix}} Euros</p>
+        <p>DATE DEBUT : {{formation.dateDebut|date('d-m-y')}}</p>
+        <p>DATE FIN : {{formation.dateFin|date('d-m-y')}}</p>
+        <p>Nombre de participants maximum : {{formation.participantMax}}</p>
+        
+        <h2><a href="{{path('bwf_formations_participant_add',{'id' : 'new'})}}">S'inscrire a cette Formation</a></h2>
+{% endfor %}
+ 
+
+

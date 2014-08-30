@@ -1,3 +1,24 @@
+bwf_formations_add:
+    pattern:  /admin/formations/add
+    defaults: { _controller: BWFFormationsBundle:Formation:addFormation }
+    
+bwf_formations_edit:
+    pattern:  /admin/formations/editer/{id}
+    defaults: { _controller: BWFFormationsBundle:Formation:editFormation }
+
+bwf_formations_delete:
+    pattern:  /admin/formations/delete/{id}
+    defaults: { _controller: BWFFormationsBundle:Formation:deleteFormation }
+    
 bwf_formations_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BWFFormationsBundle:Default:index }
+    pattern:  /{slug}
+    defaults: { _controller: BWFFormationsBundle:Formation:listeFormations }
+    
+bwf_formations_participant_liste:
+    pattern:  /admin/participants
+    defaults: { _controller: BWFFormationsBundle:Participants:listeParticipants }
+    
+bwf_formations_participant_add:
+    pattern: /participant/ajouter
+    defaults: { _controller: BWFFormationsBundle:Participant:addParticipant }
+    
